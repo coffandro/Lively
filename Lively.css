@@ -1,0 +1,15 @@
+body {
+    font-family: 'space mono', monospace;
+}
+
+html, body{
+    height: 100%;
+    margin: 0;
+}
+nav{
+    position: fixed;
+    z-index: 2;
+}
+path {
+    transition: all 0.3s;
+}
