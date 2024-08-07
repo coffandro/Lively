@@ -1,6 +1,7 @@
 let Status = {
     Hunger:10,
-    level:1
+    level:1,
+    date:1722993141038 
 }
 
 window.onload = function() {
@@ -16,7 +17,27 @@ window.onload = function() {
     } else {
         generateBlob('curvy')
     };
+    CalculateTimeSinceLogon();
 };
+
+function CalculateTimeSinceLogon() {
+    let date1 = new Date("08/17/2024");
+    let date2 = Status["date"];
+
+    // Calculating the time difference
+    // of two dates
+    let Difference_In_Time =
+    date1.getTime() - date2;
+
+    // Calculating the no. of days between
+    // two dates
+    let Difference_In_Days =
+    Math.round
+        (Difference_In_Time / (1000 * 3600 * 24));
+
+    if (Difference_In_Days > Status["Hunger"])
+        console.log(Difference_In_Days)
+}
 
 function GetLevel() {
     return ((Status["level"] - 1) / 9) * (0.05 - 1.35) + 1.35;
@@ -27,6 +48,8 @@ function getRandomArbitrary(min, max) {
 }
 
 function SaveGame() {
+    let date = new Date();
+    Status["date"] = date.getTime();
     localStorage.setItem("LivelyStatus", JSON.stringify(Status));
     GetBlobPoint();
 };
