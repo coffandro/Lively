@@ -21,13 +21,13 @@ window.onload = function() {
 };
 
 function CalculateTimeSinceLogon() {
-    let date1 = new Date("08/17/2024");
+    let date1 = new Date().getTime();
     let date2 = Status["date"];
 
     // Calculating the time difference
     // of two dates
     let Difference_In_Time =
-    date1.getTime() - date2;
+    date1 - date2;
 
     // Calculating the no. of days between
     // two dates
@@ -35,8 +35,16 @@ function CalculateTimeSinceLogon() {
     Math.round
         (Difference_In_Time / (1000 * 3600 * 24));
 
-    if (Difference_In_Days > Status["Hunger"])
-        console.log(Difference_In_Days)
+    if (Difference_In_Days > Status["Hunger"]) {
+        Dead()
+    } else {
+        Status["Hunger"] = Status["Hunger"] - Difference_In_Days
+        UpdateData()
+    }
+}
+
+function Dead() {
+    console.log("DEAD");
 }
 
 function GetLevel() {
@@ -48,7 +56,7 @@ function getRandomArbitrary(min, max) {
 }
 
 function SaveGame() {
-    let date = new Date();
+    let date = new Date("08/17/2024");
     Status["date"] = date.getTime();
     localStorage.setItem("LivelyStatus", JSON.stringify(Status));
     GetBlobPoint();
